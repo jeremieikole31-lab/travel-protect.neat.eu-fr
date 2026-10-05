@@ -1,295 +1,492 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vérification - Zeffy</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neat Travel Protect - Vérifier et Modifier son Contrat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f9fa;
+            --card-bg: #ffffff;
+            --primary-dark: #1e293b;
+            --primary-hover: #0f172a;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --highlight-pink: #fbcfe8;
+            --badge-bg: #ecfdf5;
+            --badge-text: #059669;
+            --accent-blue: #2563eb;
+        }
 
-    body {
-      background-color: #ffffff;
-      color: #0f172a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-    /* Header & Logo */
-    header {
-      width: 100%;
-      padding: 20px 0;
-      display: flex;
-      justify-content: center;
-      border-bottom: 1px solid #e2e8f0;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+        /* Header Navigation */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .logo-text {
-      font-size: 28px;
-      font-weight: 800;
-      color: #5046e5;
-      letter-spacing: -0.5px;
-    }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 800;
+            font-size: 22px;
+            color: #000;
+            text-decoration: none;
+        }
 
-    .logo-icon {
-      width: 24px;
-      height: 24px;
-      stroke: #06b6d4;
-    }
+        .logo-badge {
+            background-color: #000;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+        }
 
-    /* Main Container */
-    main {
-      width: 100%;
-      max-width: 600px;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+        .logo-sub {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 1;
+            color: #4b5563;
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* Info Badge Icon */
-    .status-icon {
-      width: 42px;
-      height: 42px;
-      background-color: #fef3c7;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
 
-    .status-icon svg {
-      width: 22px;
-      height: 22px;
-      color: #d97706;
-    }
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+            position: relative;
+        }
 
-    /* Primary Title */
-    h1 {
-      font-size: 26px;
-      font-weight: 700;
-      color: #0d1538;
-      margin-bottom: 24px;
-    }
+        nav a:hover {
+            color: var(--text-main);
+        }
 
-    .divider {
-      width: 100%;
-      max-width: 320px;
-      height: 1px;
-      background-color: #cbd5e1;
-      margin-bottom: 24px;
-    }
+        nav a.active {
+            font-weight: 600;
+            color: var(--text-main);
+        }
 
-    /* Brief Info Section */
-    .summary {
-      margin-bottom: 24px;
-    }
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -21px;
+            left: -5px;
+            right: -5px;
+            height: 3px;
+            background-color: var(--primary-dark);
+            border-radius: 2px;
+        }
 
-    .user-name {
-      font-size: 16px;
-      font-weight: 700;
-      color: #0d1538;
-      margin-bottom: 4px;
-    }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-    .user-email {
-      font-size: 14px;
-      color: #1e293b;
-      margin-bottom: 12px;
-    }
+        .lang-picker {
+            background: #f3f4f6;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-    .event-info {
-      font-size: 14px;
-      color: #1e293b;
-    }
+        .btn-primary {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            padding: 10px 24px;
+            border-radius: 24px;
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-    /* Toggle Button */
-    .toggle-btn {
-      background: none;
-      border: none;
-      color: #4f46e5;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      padding: 8px 16px;
-    }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
 
-    .toggle-btn:hover {
-      text-decoration: underline;
-    }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
 
-    /* Detailed Info Section */
-    .details-container {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
+        /* Container Main */
+        .container {
+            max-width: 1120px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
 
-    .details-container.active {
-      display: flex;
-    }
+        /* Card Component */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 36px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
 
-    .detail-group {
-      margin-bottom: 20px;
-    }
+        /* Modify Section */
+        .modify-section h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
 
-    .detail-label {
-      font-size: 14px;
-      font-weight: 700;
-      color: #0d1538;
-      margin-bottom: 4px;
-    }
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, var(--highlight-pink) 60%);
+            padding: 0 4px;
+        }
 
-    .detail-value {
-      font-size: 14px;
-      color: #1e293b;
-    }
+        .modify-section p {
+            color: #4b5563;
+            font-size: 15px;
+            margin-bottom: 12px;
+            max-width: 850px;
+        }
 
-    .section-divider {
-      width: 100%;
-      max-width: 400px;
-      height: 1px;
-      background-color: #f1f5f9;
-      margin: 15px 0 25px 0;
-    }
-  </style>
+        .modify-section p strong {
+            color: #111827;
+        }
+
+        .btn-modify {
+            margin-top: 16px;
+        }
+
+        /* Verify Section Layout */
+        .verify-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .verify-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .verify-left h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .verify-left p {
+            color: #4b5563;
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-top: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-control:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Contract Details Box */
+        .contract-info-box {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            background-color: #ffffff;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .info-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .badge-authentic {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 16px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        .info-value.names {
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .download-btn-container {
+            margin-top: 28px;
+            text-align: right;
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-dark);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- En-tête avec Logo -->
-  <header>
-    <div class="logo-container">
-      <span class="logo-text">zeffy</span>
-      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/>
-        <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/>
-      </svg>
-    </div>
-  </header>
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="logo-container">
+            <span class="logo-badge">Neat</span>
+            <div class="logo-sub">
+                <span>travel</span>
+                <span style="font-size:8px; opacity:0.8;">PROTECT</span>
+            </div>
+        </a>
 
-  <!-- Contenu Principal -->
-  <main>
-    <div class="status-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="16" x2="12" y2="12"></line>
-        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-      </svg>
-    </div>
+        <nav>
+            <a href="#">Guide de voyage</a>
+            <a href="#">Notre assurance</a>
+            <a href="#">Nous contacter</a>
+            <a href="#" class="active">Gérer le contrat ⓘ</a>
+        </nav>
 
-    <h1>Déjà vérifié</h1>
+        <div class="nav-right">
+            <button class="lang-picker" title="Changer de langue">🌐</button>
+            <a href="#" class="btn-primary">S'assurer</a>
+        </div>
+    </header>
 
-    <div class="divider"></div>
+    <main class="container">
 
-    <div class="summary">
-      <div class="user-name">Jeremie Ikole Mubala</div>
-      <div class="user-email">jeremieikole@gmail.com</div>
-      <div class="event-info">Inscription au souper officiel du 31 juillet seulement</div>
-    </div>
+        <!-- Modifier Son Contrat Section -->
+        <section class="card modify-section">
+            <h1><span class="highlight">Modifier son contrat</span> d'assurance</h1>
+            <p>Modifiez en quelques secondes votre contrat d'assurance voyage Neat Travel Visa.</p>
+            <p><strong>Les modifications sont illimitées</strong> jusqu'à la veille du départ. Il vous suffit d'indiquer la référence présente sur votre attestation d'adhésion, l'email utilisé lors de la souscription et d'appuyer sur « Modifier mon contrat ».</p>
+            <p>En cas de refus de visa, <strong>nous vous remboursons intégralement.</strong></p>
+            
+            <button class="btn-primary btn-modify" onclick="triggerAction('Modifier mon contrat')">Modifier mon contrat</button>
+        </section>
 
-    <!-- Bouton pour afficher/masquer les détails -->
-    <button class="toggle-btn" id="toggleBtn" onclick="toggleDetails()">
-      <span id="btnText">Voir plus de détails</span>
-      <svg id="arrowIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
+        <!-- Vérifier Son Contrat Section -->
+        <section class="card">
+            <div class="verify-layout">
+                
+                <!-- Left Form Side -->
+                <div class="verify-left">
+                    <h2><span class="highlight">Vérifier son contrat</span><br>d'assurance</h2>
+                    
+                    <p>Vérifiez en quelques secondes l'authenticité et la validité de votre certificat d'assurance voyage Neat Travel Visa.</p>
+                    <p>Grâce à notre outil en ligne sécurisé, il vous suffit d'indiquer la référence présente sur votre attestation d'adhésion et d'appuyer sur « Vérifier mon contrat » pour vérifier l'authenticité.</p>
 
-    <!-- Informations Détaillées -->
-    <div class="details-container" id="detailsSection">
-      
-      <div class="detail-group">
-        <div class="detail-label">Nom</div>
-        <div class="detail-value">Jeremie Ikole Mubala</div>
-      </div>
+                    <form id="verifyForm" onsubmit="handleVerify(event)">
+                        <div class="form-group">
+                            <label for="contractRef">Votre référence contrat</label>
+                            <input type="text" id="contractRef" class="input-control" value="PAYJGEKXZJTK" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn-primary">Vérifier mon contrat</button>
+                    </form>
+                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Courriel</div>
-        <div class="detail-value">jeremieikole@gmail.com</div>
-      </div>
+                <!-- Right Contract Details Box -->
+                <div class="verify-right">
+                    <div class="contract-info-box">
+                        <div>
+                            <div class="info-header">
+                                <h3>Informations du contrat</h3>
+                                <span class="badge-authentic">Authentique</span>
+                            </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Pays</div>
-        <div class="detail-value">Congo-Kinshasa</div>
-      </div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Produit d'assurance</span>
+                                    <span class="info-value">Neat Travel Visa</span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Organisation/Institution</div>
-        <div class="detail-value">MINISTERE DE L'ENSEIGNEMENT SUPERIEUR ET UNIVERSITAIRE 'C.I.D.E.P-E.S.U'</div>
-      </div>
+                                <div class="info-item">
+                                    <span class="info-label">Voyageur(s)</span>
+                                    <span class="info-value names">
+                                        JOSELINE BAPWONO BONGA
+                                    </span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">À quel genre vous identifiez-vous?</div>
-        <div class="detail-value">Homme</div>
-      </div>
+                                <div class="info-item">
+                                    <span class="info-label">Protection COVID</span>
+                                    <span class="info-value">Non</span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Avez-vous des allergies, un régime alimentaire particulier ou des restrictions alimentaires?</div>
-        <div class="detail-value">Non</div>
-      </div>
+                                <div class="info-item">
+                                    <span class="info-label">Formule Gold</span>
+                                    <span class="info-value">Non</span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Si oui, merci de préciser lesquelles:</div>
-        <div class="detail-value"></div>
-      </div>
+                                <div class="info-item">
+                                    <span class="info-label">Destination</span>
+                                    <span class="info-value">Espagne</span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Avez-vous des besoins particuliers en termes d'accessibilité (fauteuil roulant, rampe d'accès, ou autres)?</div>
-        <div class="detail-value">Non</div>
-      </div>
+                                <div class="info-item">
+                                    <span class="info-label">Départ</span>
+                                    <span class="info-value">République Démocratique du Congo</span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Si oui, merci de préciser lesquels:</div>
-        <div class="detail-value"></div>
-      </div>
+                                <div class="info-item">
+                                    <span class="info-label">Date de départ</span>
+                                    <span class="info-value">07 octobre 2026</span>
+                                </div>
 
-      <div class="section-divider"></div>
+                                <div class="info-item">
+                                    <span class="info-label">Date de retour</span>
+                                    <span class="info-value">6 novembre 2026</span>
+                                </div>
 
-      <div class="detail-group">
-        <div class="detail-label">Dates de Scan</div>
-        <div class="detail-value">vendredi 31 juillet 2026 11:11</div>
-        <div class="detail-value">vendredi 31 juillet 2026 11:14</div>
-      </div>
+                                <div class="info-item" style="grid-column: span 2;">
+                                    <span class="info-label">Couverture</span>
+                                    <span class="info-value">Jusqu'à 30 000 €</span>
+                                </div>
+                            </div>
+                        </div>
 
-    </div>
-  </main>
+                        <div class="download-btn-container">
+                            <button class="btn-primary" onclick="triggerAction('Télécharger mon contrat')">Télécharger mon contrat</button>
+                        </div>
+                    </div>
+                </div>
 
-  <script>
-    function toggleDetails() {
-      const details = document.getElementById('detailsSection');
-      const btnText = document.getElementById('btnText');
-      const arrowIcon = document.getElementById('arrowIcon');
+            </div>
+        </section>
 
-      if (details.classList.contains('active')) {
-        details.classList.remove('active');
-        btnText.textContent = 'Voir plus de détails';
-        arrowIcon.style.transform = 'rotate(0deg)';
-      } else {
-        details.classList.add('active');
-        btnText.textContent = 'Voir moins de détails';
-        arrowIcon.style.transform = 'rotate(180deg)';
-      }
-    }
-  </script>
+    </main>
+
+    <div id="toast" class="toast">Action effectuée avec succès !</div>
+
+    <script>
+        function handleVerify(event) {
+            event.preventDefault();
+            const ref = document.getElementById('contractRef').value;
+            showToast('Vérification du contrat ' + ref + ' en cours...');
+        }
+
+        function triggerAction(actionName) {
+            showToast('Action : ' + actionName);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
