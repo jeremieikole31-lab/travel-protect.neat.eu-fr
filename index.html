@@ -23,13 +23,13 @@
           },
           colors: {
             neat: {
-              dark: '#1e2538',      // Navy color for buttons & primary headings
+              dark: '#1e2538',      // Couleur Navy pour boutons et titres principaux
               darkHover: '#131927',
-              bg: '#f6f7f9',        // Off-white background
+              bg: '#f6f7f9',        // Fond gris très clair
               border: '#e5e7eb',
-              pinkAccent: '#ffdada', // Pastel pink text underline
-              greenBadge: '#e6f7f0', // Authentique badge background
-              greenText: '#0f9f6e'   // Authentique badge font
+              pinkAccent: '#ffdada', // Surlignage rose pastel
+              greenBadge: '#e6f7f0', // Fond badge Authentique
+              greenText: '#0f9f6e'   // Texte badge Authentique
             }
           }
         }
@@ -65,13 +65,12 @@
 </head>
 <body class="font-sans antialiased text-[#2d3748] bg-[#f6f7f9] min-h-full flex flex-col">
 
-  <!-- Top Navigation Header -->
   <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Brand Logo -->
+      <!-- Logo Neat Travel Protect -->
       <div class="flex items-center space-x-2">
-        <a href="#" class="flex items-center gap-1">
+        <a href="#" class="flex items-center gap-1.5">
           <div class="bg-black text-white font-black text-xl px-3 py-1.5 rounded-lg tracking-tight flex items-center">
             Neat
           </div>
@@ -82,13 +81,13 @@
         </a>
       </div>
 
-      <!-- Navigation Links -->
+      <!-- Navigation principale -->
       <nav class="hidden md:flex items-center space-x-8 text-[15px] font-medium text-gray-700">
         <a href="#" class="hover:text-neat-dark transition-colors">Guide de voyage</a>
         <a href="#" class="hover:text-neat-dark transition-colors">Notre assurance</a>
         <a href="#" class="hover:text-neat-dark transition-colors">Nous contacter</a>
         
-        <!-- Active Tab: Gérer le contrat -->
+        <!-- Onglet Actif : Gérer le contrat -->
         <div class="relative py-6">
           <a href="#" class="text-neat-dark font-semibold flex items-center gap-1.5">
             Gérer le contrat
@@ -98,14 +97,14 @@
         </div>
       </nav>
 
-      <!-- Right Header Actions -->
+      <!-- Actions de droite -->
       <div class="flex items-center space-x-4">
-        <!-- Language Selector -->
-        <button class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors" title="Langue">
+        <!-- Sélecteur de langue -->
+        <button class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors" title="Changer de langue">
           <i class="fa-solid fa-globe text-sm"></i>
         </button>
 
-        <!-- Primary Action Button -->
+        <!-- Bouton S'assurer -->
         <a href="#" class="bg-neat-dark hover:bg-neat-darkHover text-white font-medium px-6 py-2.5 rounded-full text-sm transition-all duration-200 shadow-sm">
           S'assurer
         </a>
@@ -115,8 +114,8 @@
 
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 space-y-8">
 
-    <!-- Toast Notification -->
-    <div id="toast-message" class="hidden fixed bottom-6 right-6 bg-neat-dark text-white px-5 py-3 rounded-xl shadow-xl flex items-center space-x-3 z-50 transition-all">
+    <!-- Toast Notification Flottante -->
+    <div id="toast-message" class="hidden fixed bottom-6 right-6 bg-neat-dark text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3 z-50 transition-all duration-300 transform translate-y-0">
       <i id="toast-icon" class="fa-solid fa-circle-check text-green-400 text-lg"></i>
       <span id="toast-text" class="text-sm font-medium">Action effectuée avec succès.</span>
     </div>
@@ -146,10 +145,9 @@
       </div>
     </section>
 
-    <!-- SECTION 2: Vérifier son contrat d'assurance & Card Details -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      <!-- Left Column: Search Form -->
+      <!-- Colonne Gauche: Formulaire de recherche -->
       <div class="lg:col-span-5 neat-card p-6 sm:p-8">
         <h2 class="text-2xl font-extrabold text-neat-dark mb-6 tracking-tight">
           <span class="title-highlight">Vérifier son contrat</span><br class="hidden sm:inline"> d'assurance
@@ -188,11 +186,10 @@
         </form>
       </div>
 
-      <!-- Right Column: Contract Information Card -->
       <div class="lg:col-span-7 neat-card p-6 sm:p-8 flex flex-col justify-between min-h-full" id="details-card">
         
         <div>
-          <!-- Card Header & Badge -->
+          <!-- En-tête Carte & Badge Authentique -->
           <div class="flex items-center justify-between border-b border-gray-100 pb-5 mb-6">
             <h3 class="text-xl font-bold text-neat-dark">Informations du contrat</h3>
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-neat-greenBadge text-neat-greenText">
@@ -200,7 +197,7 @@
             </span>
           </div>
 
-          <!-- Key Value Details Grid -->
+          <!-- Grille des détails du contrat -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8 text-sm">
             
             <!-- Item 1: Produit d'assurance -->
@@ -262,7 +259,7 @@
           </div>
         </div>
 
-        <!-- Download Button -->
+        <!-- Bouton Télécharger le contrat -->
         <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
           <button 
             onclick="handleDownloadContract()" 
@@ -279,7 +276,6 @@
 
   </main>
 
-  <!-- Footer -->
   <footer class="bg-white border-t border-gray-200 py-8 mt-12 text-center text-xs text-gray-500">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
       <p>© 2026 Neat Travel Protect. Tous droits réservés.</p>
@@ -292,7 +288,7 @@
   </footer>
 
   <script>
-    // Updated contract database with MIRADI MISENGA KABEYA
+    // Base de données simulée mise à jour avec MIRADI MISENGA KABEYA
     const database = {
       'PAYJGEKXZJTK': {
         product: 'Neat Travel Visa',
@@ -308,6 +304,7 @@
       }
     };
 
+    // Afficher une notification Toast
     function showToast(message, isError = false) {
       const toast = document.getElementById('toast-message');
       const toastText = document.getElementById('toast-text');
@@ -327,6 +324,7 @@
       }, 3500);
     }
 
+    // Gestion du formulaire de vérification
     function handleVerifyContract(event) {
       event.preventDefault();
 
@@ -358,15 +356,17 @@
 
           showToast('Contrat vérifié avec succès !');
         } else {
-          showToast('Référence introuvable. Code test : PAYJGEKXZJTK', true);
+          showToast('Référence introuvable. Code de référence : PAYJGEKXZJTK', true);
         }
-      }, 500);
+      }, 600);
     }
 
+    // Simulation de modification de contrat
     function handleModifyContract() {
-      showToast('Espace de modification du contrat...');
+      showToast('Redirection vers l\'espace de modification...');
     }
 
+    // Simulation du téléchargement PDF
     function handleDownloadContract() {
       const ref = document.getElementById('contractRef').value || 'PAYJGEKXZJTK';
       showToast(`Téléchargement de l'attestation ${ref}.pdf ...`);
