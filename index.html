@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neat Travel Protect - Gérer le contrat</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Plus Jakarta Sans / Inter -->
@@ -22,13 +23,13 @@
           },
           colors: {
             neat: {
-              dark: '#1e2538',      // Main dark navy color for buttons & active headers
+              dark: '#1e2538',      // Navy color for buttons & primary headings
               darkHover: '#131927',
-              bg: '#f6f7f9',        // Off-white light grey background
+              bg: '#f6f7f9',        // Off-white background
               border: '#e5e7eb',
-              pinkAccent: '#ffdada', // Pink highlight bar under titles
-              greenBadge: '#e6f7f0', // Authentique badge bg
-              greenText: '#0f9f6e'   // Authentique badge text
+              pinkAccent: '#ffdada', // Pastel pink text underline
+              greenBadge: '#e6f7f0', // Authentique badge background
+              greenText: '#0f9f6e'   // Authentique badge font
             }
           }
         }
@@ -54,7 +55,6 @@
       border-radius: 2px;
     }
 
-    /* Soft smooth shadow for elevated cards */
     .neat-card {
       background: #ffffff;
       border-radius: 16px;
@@ -115,10 +115,10 @@
 
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 space-y-8">
 
-    <!-- Toast / Alert Notification Box -->
-    <div id="toast-message" class="hidden fixed bottom-6 right-6 bg-neat-dark text-white px-5 py-3 rounded-xl shadow-xl flex items-center space-x-3 z-50 transition-all transform translate-y-0">
+    <!-- Toast Notification -->
+    <div id="toast-message" class="hidden fixed bottom-6 right-6 bg-neat-dark text-white px-5 py-3 rounded-xl shadow-xl flex items-center space-x-3 z-50 transition-all">
       <i id="toast-icon" class="fa-solid fa-circle-check text-green-400 text-lg"></i>
-      <span id="toast-text" class="text-sm font-medium">Contrat mis à jour avec succès.</span>
+      <span id="toast-text" class="text-sm font-medium">Action effectuée avec succès.</span>
     </div>
 
     <!-- SECTION 1: Modifier son contrat d'assurance -->
@@ -146,10 +146,10 @@
       </div>
     </section>
 
-    <!-- SECTION 2: Vérifier son contrat d'assurance & Display Card Grid -->
+    <!-- SECTION 2: Vérifier son contrat d'assurance & Card Details -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      <!-- Left Column: Verification Form -->
+      <!-- Left Column: Search Form -->
       <div class="lg:col-span-5 neat-card p-6 sm:p-8">
         <h2 class="text-2xl font-extrabold text-neat-dark mb-6 tracking-tight">
           <span class="title-highlight">Vérifier son contrat</span><br class="hidden sm:inline"> d'assurance
@@ -188,7 +188,7 @@
         </form>
       </div>
 
-      <!-- Right Column: Contract Details Card -->
+      <!-- Right Column: Contract Information Card -->
       <div class="lg:col-span-7 neat-card p-6 sm:p-8 flex flex-col justify-between min-h-full" id="details-card">
         
         <div>
@@ -203,21 +203,21 @@
           <!-- Key Value Details Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8 text-sm">
             
-            <!-- Item 1: Produit -->
+            <!-- Item 1: Produit d'assurance -->
             <div>
               <p class="text-gray-900 font-bold mb-1">Produit d'assurance</p>
               <p class="text-gray-500 font-medium" id="field-product">Neat Travel Visa</p>
             </div>
 
-            <!-- Item 2: Voyageurs -->
+            <!-- Item 2: Voyageur(s) -->
             <div>
               <p class="text-gray-900 font-bold mb-1">Voyageur(s)</p>
               <div class="text-gray-500 font-medium uppercase space-y-0.5" id="field-travelers">
-                <p>NISSI MENGI DIAYANGA</p>
+                <p>MIRADI MISENGA KABEYA</p>
               </div>
             </div>
 
-            <!-- Item 3: COVID -->
+            <!-- Item 3: Protection COVID -->
             <div>
               <p class="text-gray-900 font-bold mb-1">Protection COVID</p>
               <p class="text-gray-500 font-medium" id="field-covid">Non</p>
@@ -262,7 +262,7 @@
           </div>
         </div>
 
-        <!-- Download Action Area -->
+        <!-- Download Button -->
         <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
           <button 
             onclick="handleDownloadContract()" 
@@ -292,11 +292,11 @@
   </footer>
 
   <script>
-    // Database updated with NISSI MENGI DIAYANGA data
+    // Updated contract database with MIRADI MISENGA KABEYA
     const database = {
       'PAYJGEKXZJTK': {
         product: 'Neat Travel Visa',
-        travelers: ['NISSI MENGI DIAYANGA'],
+        travelers: ['MIRADI MISENGA KABEYA'],
         covid: 'Non',
         gold: 'Non',
         destination: 'Espagne',
@@ -308,7 +308,6 @@
       }
     };
 
-    // Notification Helper
     function showToast(message, isError = false) {
       const toast = document.getElementById('toast-message');
       const toastText = document.getElementById('toast-text');
@@ -328,7 +327,6 @@
       }, 3500);
     }
 
-    // Handle Contract Verification logic
     function handleVerifyContract(event) {
       event.preventDefault();
 
@@ -336,7 +334,6 @@
       const btnText = document.getElementById('btn-text');
       const btnSpinner = document.getElementById('btn-spinner');
 
-      // Loading UI State
       btnText.textContent = "Vérification...";
       btnSpinner.classList.remove('hidden');
 
@@ -347,7 +344,6 @@
         const contract = database[inputVal];
 
         if (contract) {
-          // Update details UI
           document.getElementById('field-product').textContent = contract.product;
           document.getElementById('field-covid').textContent = contract.covid;
           document.getElementById('field-gold').textContent = contract.gold;
@@ -357,23 +353,20 @@
           document.getElementById('field-end-date').textContent = contract.endDate;
           document.getElementById('field-coverage').textContent = contract.coverage;
 
-          // Travelers array update
           const travelersContainer = document.getElementById('field-travelers');
           travelersContainer.innerHTML = contract.travelers.map(t => `<p>${t}</p>`).join('');
 
-          showToast('Contrat vérifié et trouvé !');
+          showToast('Contrat vérifié avec succès !');
         } else {
-          showToast('Référence inconnue. Essayez: PAYJGEKXZJTK', true);
+          showToast('Référence introuvable. Code test : PAYJGEKXZJTK', true);
         }
-      }, 600);
+      }, 500);
     }
 
-    // Handle Modify Contract button click
     function handleModifyContract() {
-      showToast('Redirection vers l\'espace de modification...');
+      showToast('Espace de modification du contrat...');
     }
 
-    // Handle Download Contract simulation
     function handleDownloadContract() {
       const ref = document.getElementById('contractRef').value || 'PAYJGEKXZJTK';
       showToast(`Téléchargement de l'attestation ${ref}.pdf ...`);
